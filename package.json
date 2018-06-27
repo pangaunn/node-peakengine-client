@@ -1,0 +1,22 @@
+{
+  "name": "peakengine-client",
+  "version": "0.1.0",
+  "description": "Client for connect to Peakengine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pangaunn/node-peakengine-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pangaunn/node-peakengine-client/issues"
+  },
+  "homepage": "https://github.com/pangaunn/node-peakengine-client#readme",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
