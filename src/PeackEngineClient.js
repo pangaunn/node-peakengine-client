@@ -11,7 +11,6 @@ module.exports = class PeakEngineClient {
     })
 
     this.client.interceptors.request.use(peakEngineRequestInterceptor)
-    this.client.interceptors.response.use(peakEngineResponseInterceptor, peakEngineResponseErrorInterceptor)
   }
 }
 
