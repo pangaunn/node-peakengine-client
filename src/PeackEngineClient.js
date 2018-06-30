@@ -10,17 +10,20 @@ module.exports = class PeakEngineClient {
       }
     })
 
-    this.client.interceptors.request.use(peakEngineRequestInterceptor)
+    this.client.interceptors.request.use(this.requestInterceptor)
+  }
+
+  requestInterceptor (config) {
+    const { timeStamp, encrypted } = this.generateHeaders()
+    config.headers['Time-Stamp'] = `${timeStamp}`
+    config.headers['Time-Signature'] = encrypted
+    return config
+  }
+
+  generateHeaders () {
+
   }
 }
 
-function peakEngineRequestInterceptor (config) {
-  const { timeStamp, encrypted } = generateHeaders()
-  config.headers['Time-Stamp'] = `${timeStamp}`
-  config.headers['Time-Signature'] = encrypted
-  return config
-}
 
-function generateHeaders () {
 
-}
