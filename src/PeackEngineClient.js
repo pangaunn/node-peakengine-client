@@ -10,18 +10,25 @@ module.exports = class PeakEngineClient {
         'User-Token': token
       }
     })
-
     this.client.interceptors.request.use(this.requestInterceptor)
   }
 
   requestInterceptor (config) {
     const { timeStamp, encrypted } = this.generateHeaders()
-    config.headers['Time-Stamp'] = DateTime.utc().toFormat('YYYYMMDDHHmmss')
+    config.headers['Time-Stamp'] = timeStamp
     config.headers['Time-Signature'] = encrypted
     return config
   }
 
   generateHeaders () {
+    const timeStamp = DateTime.utc().toFormat('YYYYMMDDHHmmss')
+    return {
+      timeStamp: DateTime.utc().toFormat('YYYYMMDDHHmmss'),
+      encryptedTimeStamp: this.encryptTimeStamp(timeStamp)
+    }
+  }
+
+  encryptTimeStamp () {
 
   }
 }
