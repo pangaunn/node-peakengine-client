@@ -11,7 +11,7 @@ module.exports = class PeakEngineClient {
       }
     })
 
-    // this.client.interceptors.request.use(peakEngineRequestInterceptor)
+    this.client.interceptors.request.use(peakEngineRequestInterceptor())
   }
   async findContact (queryBy, query) {
     const { data: contacts } = await this.client.get(`/contacts?${queryBy}=${query}`)
@@ -22,17 +22,17 @@ module.exports = class PeakEngineClient {
   }
 }
 
-// function peakEngineRequestInterceptor (config) {
-//   const { timeStamp, encrypted } = generateHeaders()
-//   config.headers['Time-Stamp'] = `${timeStamp}`
-//   config.headers['Time-Signature'] = encrypted
-//   return config
-// }
+function peakEngineRequestInterceptor (config) {
+  const { timeStamp, encrypted } = generateHeaders()
+  config.headers['Time-Stamp'] = `${timeStamp}`
+  config.headers['Time-Signature'] = encrypted
+  return config
+}
 
 function generateHeaders (CONNECTION_ID) {
   let hmacsha1 = crypto.createHmac('sha1', CONNECTION_ID).update(timeStamp())
   let encrypted = hmacsha1.digest('hex')
-  return {encrypted, timeStamp: timeStamp()}
+  return { encrypted, timeStamp: timeStamp() }
 }
 
 function timeStamp () {
