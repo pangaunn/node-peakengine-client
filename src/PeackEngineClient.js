@@ -13,8 +13,8 @@ module.exports = class PeakEngineClient {
 
     // this.client.interceptors.request.use(peakEngineRequestInterceptor)
   }
-  async findContact (query, target) {
-    const { data: contacts } = await this.client.get(`/contacts?${target}=${query}`)
+  async findContact (queryBy, query) {
+    const { data: contacts } = await this.client.get(`/contacts?${queryBy}=${query}`)
     return contacts
   }
   getTimeStamp () {
