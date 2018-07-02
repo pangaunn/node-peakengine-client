@@ -1,4 +1,5 @@
 const axios = require('axios')
+const crypto = require('crypto')
 const { DateTime } = require('luxon')
 module.exports = class PeakEngineClient {
   constructor (url, token) {
@@ -28,8 +29,9 @@ module.exports = class PeakEngineClient {
     }
   }
 
-  encryptTimeStamp () {
-
+  encryptWithSha1 (timeStamp) {
+    let hmacsha1 = crypto.createHmac('sha1', process.env.CONNECTION_ID).update(timeStamp)
+    return hmacsha1.digest('hex')
   }
 }
 
