@@ -25,7 +25,7 @@ module.exports = class PeakEngineClient {
     const timeStamp = DateTime.utc().toFormat('YYYYMMDDHHmmss')
     return {
       timeStamp: DateTime.utc().toFormat('YYYYMMDDHHmmss'),
-      encryptedTimeStamp: this.encryptTimeStamp(timeStamp)
+      encryptedTimeStamp: this.encryptWithSha1(timeStamp)
     }
   }
 
