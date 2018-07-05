@@ -27,28 +27,16 @@ module.exports = class PeakEngineClient {
     config.headers['Time-Signature'] = encrypted
     return config
   }
-
   generateHeaders () {
-    const timeStamp = DateTime.utc().toFormat('YYYYMMDDHHmmss')
+    const timeStamp = getCurrentIime()
     return {
-      timeStamp: DateTime.utc().toFormat('YYYYMMDDHHmmss'),
-      encryptedTimeStamp: this.encryptWithSha1(timeStamp)
+      timeStamp,
+      encryptedTimeStamp: encryptWithSha1(timeStamp)
     }
   }
-
-  encryptWithSha1 (timeStamp) {
-    let hmacsha1 = crypto.createHmac('sha1', this.connectionId).update(timeStamp)
-    return hmacsha1.digest('hex')
-  }
 }
 
-function generateHeaders (CONNECTION_ID) {
-  let hmacsha1 = crypto.createHmac('sha1', CONNECTION_ID).update(timeStamp())
-  let encrypted = hmacsha1.digest('hex')
-  return { encrypted, timeStamp: timeStamp() }
-}
-
-function timeStamp () {
+function getCurrentIime () {
   const now = new Date();
   const year = now.getUTCFullYear().toString();
   const month = (now.getUTCMonth() + 1).toString();
@@ -56,9 +44,15 @@ function timeStamp () {
   const hour = now.getUTCHours().toString();
   const minute = now.getUTCMinutes().toString();
   const second = now.getUTCSeconds().toString();
-  return `${year}${generateTime(month)}${generateTime(date)}${generateTime(hour)}${generateTime(minute)}${generateTime(second)}`
+  return `${year}${generateTime(month)}${(date)}${generateTime(hour)}${generateTime(minute)}${generateTime(second)}`
 }
 
 function generateTime (time) {
   return (time < 10) ? '0' + time : time
 }
+
+function encryptWithSha1 (timeStamp) {
+  let hmacsha1 = crypto.createHmac('sha1', this.connectionId).update(timeStamp)
+  return hmacsha1.digest('hex')
+}
+
