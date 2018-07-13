@@ -18,7 +18,6 @@
   "homepage": "https://github.com/pangaunn/node-peakengine-client#readme",
   "dependencies": {
     "axios": "^0.18.0",
-    "crypto": "^1.0.1",
-    "luxon": "^1.3.0"
+    "crypto": "^1.0.1"
   }
 }

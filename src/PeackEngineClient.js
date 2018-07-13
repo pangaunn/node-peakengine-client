@@ -1,6 +1,5 @@
 const axios = require('axios')
 const crypto = require('crypto')
-const { DateTime } = require('luxon')
 module.exports = class PeakEngineClient {
   constructor (url, connectionId, token) {
     this.client = axios.create({
